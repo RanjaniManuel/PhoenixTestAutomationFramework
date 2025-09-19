@@ -13,10 +13,8 @@ public class ConfigManager {
 	private static Properties prop = new Properties();
 	private static String path = "config/config.properties";
 	private static String env;
-	// public static String
 	static {
-		// File configFile=new File(System.getProperty("user.dir")
-		// +File.separator+"src"+File.separator+"test"+File.separator+"resources"+File.separator+"config"+File.separator+"config.properties");
+	
 		env = System.getProperty("env", "qa");
 		env = env.toLowerCase().trim();
 		switch (env) {
@@ -27,12 +25,10 @@ public class ConfigManager {
 
 		}
 		InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
-		// FileReader fileReader;
 		if (inputStream == null) {
 			throw new RuntimeException("cannot find the file at the path" + path);
 		}
 		try {
-			// fileReader = new FileReader(inputStream);
 			prop.load(inputStream);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
