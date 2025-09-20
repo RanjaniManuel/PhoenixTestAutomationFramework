@@ -9,7 +9,6 @@ public class ConfigManager {
 	private ConfigManager() {
 
 	}
-
 	private static Properties prop = new Properties();
 	private static String path = "config/config.properties";
 	private static String env;
@@ -35,12 +34,9 @@ public class ConfigManager {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
-
 	public static String getProperty(String key) {
 
 		return prop.getProperty(key.toUpperCase());
 	}
-
 }
