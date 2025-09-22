@@ -14,7 +14,7 @@ on:
     inputs:
         env:
         description : "Environment"
-        type : Choice
+        type : choice
         options : [qa, uat, dev ]
         default : qa
         required : true
