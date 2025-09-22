@@ -9,6 +9,7 @@ on:
     branches: [ "master" ]
   schedule:
     - cron: "00 4 * * *"
+    
   workflow_dispatch:
     inputs:
       env:
@@ -33,7 +34,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Execute Test Automation Framework
-      run: mvn test -DsuiteXmlFile=testng.xml -Denv=qa
+      run: mvn test -DsuiteXmlFile=testng.xml -Denv="${{ github.event.inputs.env}}"
     - name: Upload a Build Artifact
       if: always()
       uses: actions/upload-artifact@v4.6.2
