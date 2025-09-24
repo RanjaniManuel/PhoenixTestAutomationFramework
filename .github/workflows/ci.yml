@@ -10,6 +10,7 @@ on:
   schedule:
     - cron: "00 4 * * *"
     - cron: "59 3 * * *"
+    - cron: "01 4 * * *"
     
   workflow_dispatch:
     inputs:
