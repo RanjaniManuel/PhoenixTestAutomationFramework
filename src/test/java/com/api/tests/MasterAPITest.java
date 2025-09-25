@@ -4,30 +4,21 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
 import com.api.constants.Role;
-import com.api.utils.AuthTokenProvider;
-import com.api.utils.ConfigManager;
+import com.api.utils.SpecUtil;
 
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class MasterAPITest {
 	@Test
 	public void masterAPITest() {
 		RestAssured.given()
-			       .and()
-			       .baseUri(ConfigManager.getProperty("BASE_URI"))
-			       .and()
-			       .accept(ContentType.JSON)
-			       .and()
-			       .headers("Authorization",AuthTokenProvider.getToken(Role.FD))
-			       .and()
+			       .spec(SpecUtil.requestSpecWithAuth(Role.FD))
 			       .contentType("")
 			       .when()
 			       .post("master")
 			       .then()
-			       .statusCode(200)
-			       .time(Matchers.lessThan(1000L))
+			       .spec(SpecUtil.responseSpec_OK())
 			       .body("message", Matchers.equalTo("Success"))
 			       .body("data", Matchers.notNullValue())
 			       .body("$", Matchers.hasKey("message"))
@@ -53,16 +44,12 @@ public class MasterAPITest {
 	
 	public void masterAPITest_NoToken() {
 		RestAssured.given()
-	       .and()
-	       .baseUri(ConfigManager.getProperty("BASE_URI"))
-	       .and()
-	       .accept(ContentType.JSON)
-	       .and()
+	       .spec(SpecUtil.requestSpec())
 	       .contentType("")
 	       .when()
 	       .post("master")
 	       .then()
-	       .statusCode(401)
+	       .spec(SpecUtil.responseSpec_Text(401))
 	       .log().ifValidationFails();
 		}
 
