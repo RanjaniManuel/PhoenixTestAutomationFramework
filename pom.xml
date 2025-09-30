@@ -8,8 +8,8 @@
 	<name>PhoenixTestAutomationProject</name>
 	<description>PhoenixTestAutomationProject</description>
 	<properties>
-		<maven.compiler.source>15</maven.compiler.source>
-		<maven.compiler.target>15</maven.compiler.target>
+		<maven.compiler.source>16</maven.compiler.source>
+		<maven.compiler.target>16</maven.compiler.target>
 	</properties>
 	<build>
 		<plugins>
@@ -53,6 +53,7 @@
 			<version>5.5.6</version>
 		</dependency>
 
+		
 	</dependencies>
 
 </project>
