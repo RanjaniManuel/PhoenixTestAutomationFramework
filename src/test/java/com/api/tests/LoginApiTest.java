@@ -5,7 +5,7 @@ import static io.restassured.RestAssured.given;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
-import com.api.pojos.UserCredential;
+import com.api.request.model.UserCredential;
 import com.api.utils.SpecUtil;
 
 import io.restassured.module.jsv.JsonSchemaValidator;

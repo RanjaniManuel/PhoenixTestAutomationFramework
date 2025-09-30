@@ -8,11 +8,11 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
 import com.api.constants.Role;
-import com.api.pojos.CreateJobPojo;
-import com.api.pojos.Customer;
-import com.api.pojos.CustomerAddress;
-import com.api.pojos.CustomerProduct;
-import com.api.pojos.Problem;
+import com.api.request.model.CreateJobPojo;
+import com.api.request.model.Customer;
+import com.api.request.model.CustomerAddress;
+import com.api.request.model.CustomerProduct;
+import com.api.request.model.Problem;
 import com.api.utils.SpecUtil;
 
 import io.restassured.RestAssured;
