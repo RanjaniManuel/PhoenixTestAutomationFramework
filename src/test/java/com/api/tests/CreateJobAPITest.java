@@ -13,6 +13,7 @@ import com.api.request.model.Customer;
 import com.api.request.model.CustomerAddress;
 import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problem;
+import com.api.utils.DateTimeUtil;
 import com.api.utils.SpecUtil;
 
 import io.restassured.RestAssured;
@@ -23,14 +24,14 @@ public class CreateJobAPITest {
 	public void createJobApi() {
 		Random random = new Random();
         
-        // Minimum 14-digit number
+		// Minimum 14-digit number
         long min = 10000000000000L; 
         long max = 99999999999999L;        
         long number = min + (long)(random.nextDouble() * (max - min));
         
 		Customer customer=new Customer("Ahi", "Rana", "9874563215", "8956231452", "ahi@gmail.com", "rana@gmail.com");
 		CustomerAddress customerAddress=new CustomerAddress("789", "Sai parivar", "M N Nmbiyar", "good Area", "Madurai", "987456", "India", "TamilNadu");
-		CustomerProduct customerProduct=new CustomerProduct("2025-04-08T04:00:00.000Z", String.valueOf(number),  String.valueOf(number),  String.valueOf(number) , "2025-04-08T04:00:00.000Z", 3, 3);
+		CustomerProduct customerProduct=new CustomerProduct(DateTimeUtil.getTimeWithDaysAgo(10), String.valueOf(number),  String.valueOf(number),  String.valueOf(number) , DateTimeUtil.getTimeWithDaysAgo(10), 3, 3);
 		
 		Problem problem=new Problem(1, "Slow");
 		List<Problem> problemArray=new ArrayList<Problem>();
