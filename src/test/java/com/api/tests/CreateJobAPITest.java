@@ -7,7 +7,14 @@ import java.util.Random;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
+import com.api.constants.Model;
+import com.api.constants.OEM;
+import com.api.constants.Platform;
+import com.api.constants.Problems;
+import com.api.constants.Product;
 import com.api.constants.Role;
+import com.api.constants.ServiceCenter;
+import com.api.constants.WarrentyStatus;
 import com.api.request.model.CreateJobPojo;
 import com.api.request.model.Customer;
 import com.api.request.model.CustomerAddress;
@@ -31,12 +38,13 @@ public class CreateJobAPITest {
         
 		Customer customer=new Customer("Ahi", "Rana", "9874563215", "8956231452", "ahi@gmail.com", "rana@gmail.com");
 		CustomerAddress customerAddress=new CustomerAddress("789", "Sai parivar", "M N Nmbiyar", "good Area", "Madurai", "987456", "India", "TamilNadu");
-		CustomerProduct customerProduct=new CustomerProduct(DateTimeUtil.getTimeWithDaysAgo(10), String.valueOf(number),  String.valueOf(number),  String.valueOf(number) , DateTimeUtil.getTimeWithDaysAgo(10), 3, 3);
+		CustomerProduct customerProduct=new CustomerProduct(DateTimeUtil.getTimeWithDaysAgo(10), String.valueOf(number),  String.valueOf(number),  String.valueOf(number) ,
+				DateTimeUtil.getTimeWithDaysAgo(10), Product.NEXUS.getCode(), Model.NEXUS_2_BLUE.getCode());
 		
-		Problem problem=new Problem(1, "Slow");
+		Problem problem=new Problem(Problems.CAMERA_ISSUE.getCode(), "Slow");
 		List<Problem> problemArray=new ArrayList<Problem>();
 		problemArray.add(problem);
-		CreateJobPojo createJobPojo=new CreateJobPojo(0, 2, 1, 2, customer, customerAddress, customerProduct, problemArray);
+		CreateJobPojo createJobPojo=new CreateJobPojo(ServiceCenter.SERVICE_CENTER_A.getCode(), Platform.FRONT_DESK.getCode(), WarrentyStatus.IN_WARRENTY.getCode(), OEM.GOOGLE.getCode(), customer, customerAddress, customerProduct, problemArray);
 		 RestAssured.given()
 		 		.spec(SpecUtil.requestSpecWithAuth(Role.FD,createJobPojo))
 		 		.when()
