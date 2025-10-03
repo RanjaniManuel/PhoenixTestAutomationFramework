@@ -10,7 +10,8 @@ import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class UserDetailApiTest {
-	@Test
+	@Test(description = "verifying if UserDetail APi is able to provice correct response", groups = {"api","regression","smoke"})
+
 	public void userDetailApiTest() {
 	
 		RestAssured.given()
