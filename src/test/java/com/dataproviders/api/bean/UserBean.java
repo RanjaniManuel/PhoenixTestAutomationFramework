@@ -1,13 +1,13 @@
-package com.demo.csv;
+package com.dataproviders.api.bean;
 
-public class UserPojo {
+public class UserBean {
 	//@CsvBindByName(column = "username")
 	private String username;
 	private String password;
-	public UserPojo() {
+	public UserBean() {
 		// TODO Auto-generated constructor stub
 	}
-	public UserPojo(String username, String password) {
+	public UserBean(String username, String password) {
 		super();
 		this.username = username;
 		this.password = password;
