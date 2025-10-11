@@ -2,6 +2,7 @@ package com.api.utils;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Iterator;
 import java.util.List;
 
 import com.dataproviders.api.bean.UserBean;
@@ -14,7 +15,7 @@ public class CSVReaderUtil {
 	
 	private CSVReaderUtil() {
 	} 
-	public static void loadCsv(String pathOfCSVFile) {
+	public static Iterator<UserBean> loadCsv(String pathOfCSVFile) {
 		InputStream inputStream= Thread.currentThread().getContextClassLoader().getResourceAsStream(pathOfCSVFile);
 		InputStreamReader inputStreamReader=new InputStreamReader(inputStream);
 		CSVReader csvReader=new CSVReader(inputStreamReader);
@@ -24,7 +25,7 @@ public class CSVReaderUtil {
 												.withIgnoreEmptyLine(true)
 												.build();
 		List<UserBean> list = csvToBean.parse();
-		System.out.println(list);				
+		return list.iterator();			
 	
 	}
 }
