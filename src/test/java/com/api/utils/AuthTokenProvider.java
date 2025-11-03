@@ -43,7 +43,9 @@ public class AuthTokenProvider {
 		.extract()
 		.body()
 		.jsonPath()
+	
 		.getString("data.token");
+		
 		return token;
 	}
 	

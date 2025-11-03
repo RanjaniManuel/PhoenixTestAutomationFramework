@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import com.api.constants.Model;
 import com.api.constants.OEM;
 import com.api.constants.Platform;
-import com.api.constants.Problems;
+import com.api.constants.Problem;
 import com.api.constants.Product;
 import com.api.constants.Role;
 import com.api.constants.ServiceCenter;
@@ -20,7 +20,7 @@ import com.api.request.model.CreateJobPojo;
 import com.api.request.model.Customer;
 import com.api.request.model.CustomerAddress;
 import com.api.request.model.CustomerProduct;
-import com.api.request.model.Problem;
+import com.api.request.model.Problems;
 import com.api.utils.DateTimeUtil;
 import com.api.utils.SpecUtil;
 
@@ -46,8 +46,8 @@ public class CreateJobAPITest {
 				String.valueOf(number), String.valueOf(number), String.valueOf(number),
 				DateTimeUtil.getTimeWithDaysAgo(10), Product.NEXUS.getCode(), Model.NEXUS_2_BLUE.getCode());
 
-		Problem problem = new Problem(Problems.CAMERA_ISSUE.getCode(), "Slow");
-		List<Problem> problemArray = new ArrayList<Problem>();
+		Problems problem = new Problems(Problem.CAMERA_ISSUE.getCode(), "Slow");
+		List<Problems> problemArray = new ArrayList<Problems>();
 		problemArray.add(problem);
 		createJobPojo = new CreateJobPojo(ServiceCenter.SERVICE_CENTER_A.getCode(), Platform.FRONT_DESK.getCode(),
 				WarrentyStatus.IN_WARRENTY.getCode(), OEM.GOOGLE.getCode(), customer, customerAddress, customerProduct,
