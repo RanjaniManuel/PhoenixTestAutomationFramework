@@ -16,7 +16,7 @@ import com.api.constants.Product;
 import com.api.constants.Role;
 import com.api.constants.ServiceCenter;
 import com.api.constants.WarrentyStatus;
-import com.api.request.model.CreateJobPojo;
+import com.api.request.model.CreateJobPayload;
 import com.api.request.model.Customer;
 import com.api.request.model.CustomerAddress;
 import com.api.request.model.CustomerProduct;
@@ -28,7 +28,7 @@ import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 // created by Ranjani
 public class CreateJobAPITest {
-	private CreateJobPojo createJobPojo;
+	private CreateJobPayload createJobPayload;
 
 	@BeforeMethod(description = "Creating CreateJob Api request payload")
 	public void setUp() {
@@ -49,7 +49,7 @@ public class CreateJobAPITest {
 		Problems problem = new Problems(Problem.CAMERA_ISSUE.getCode(), "Slow");
 		List<Problems> problemArray = new ArrayList<Problems>();
 		problemArray.add(problem);
-		createJobPojo = new CreateJobPojo(ServiceCenter.SERVICE_CENTER_A.getCode(), Platform.FRONT_DESK.getCode(),
+		createJobPayload = new CreateJobPayload(ServiceCenter.SERVICE_CENTER_A.getCode(), Platform.FRONT_DESK.getCode(),
 				WarrentyStatus.IN_WARRENTY.getCode(), OEM.GOOGLE.getCode(), customer, customerAddress, customerProduct,
 				problemArray);
 	}
@@ -58,7 +58,7 @@ public class CreateJobAPITest {
 			"smoke" })
 	public void createJobApi() {
 
-		RestAssured.given().spec(SpecUtil.requestSpecWithAuth(Role.FD, createJobPojo)).when().post("job/create").then()
+		RestAssured.given().spec(SpecUtil.requestSpecWithAuth(Role.FD, createJobPayload)).when().post("job/create").then()
 				.spec(SpecUtil.responseSpec_OK())
 				.body(JsonSchemaValidator
 						.matchesJsonSchemaInClasspath("response-schema/createJobAPIResponseSchema.json"))
