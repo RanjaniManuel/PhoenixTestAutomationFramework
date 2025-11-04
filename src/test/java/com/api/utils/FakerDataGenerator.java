@@ -23,8 +23,9 @@ public class FakerDataGenerator {
 	private static final int MST_OEM_ID = 1;
 	private static final int PRODUCT_ID = 1;
 	private static final int MST_MODEL_ID = 1;
-	
-	private static final int[] VALIDPROBLEMID= {1,2,3,4,5,6,7,8,9,10,11,12,15,16,17,19,20,22,24,26,27,28,29};
+
+	private static final int[] VALIDPROBLEMID = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16, 17, 19, 20, 22, 24, 26,
+			27, 28, 29 };
 
 	private FakerDataGenerator() {
 		// TODO Auto-generated constructor stub
@@ -60,14 +61,17 @@ public class FakerDataGenerator {
 
 	private static List<Problems> generateFakeListProblems() {
 
-		String sentence = faker.lorem().sentence(5);
-		int randomIndex = random.nextInt(23);
-
-		Problems problems = new Problems(VALIDPROBLEMID[randomIndex], sentence);
-
+		int count = random.nextInt(1, 4);
+		String sentence;
+		Problems problems;
+		int randomIndex;
 		List<Problems> list = new ArrayList<Problems>();
-		list.add(problems);
-
+		for (int i = 0; i < count; i++) {
+			sentence = faker.lorem().sentence(5);
+			randomIndex = random.nextInt(23);
+			problems = new Problems(VALIDPROBLEMID[randomIndex], sentence);
+			list.add(problems);
+		}
 		return list;
 	}
 
