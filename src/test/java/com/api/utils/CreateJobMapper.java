@@ -3,7 +3,7 @@ package com.api.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.api.request.model.CreateJobPojo;
+import com.api.request.model.CreateJobPayload;
 import com.api.request.model.Customer;
 import com.api.request.model.CustomerAddress;
 import com.api.request.model.CustomerProduct;
@@ -14,7 +14,7 @@ public class CreateJobMapper {
 	
 	private CreateJobMapper() {
 	}
-	public static CreateJobPojo mapper(CreateJobBean bean) {
+	public static CreateJobPayload mapper(CreateJobBean bean) {
 		
 		//csv file values are all String . we need to convert them according  our need
 		
@@ -59,7 +59,7 @@ public class CreateJobMapper {
 		List<Problems> problemList=new ArrayList<Problems>();
 		problemList.add(problems);
 		
-		CreateJobPojo job=new CreateJobPojo(mst_service_location_id, 
+		CreateJobPayload job=new CreateJobPayload(mst_service_location_id, 
 											Mst_platform_id,
 											Mst_warrenty_status_id,
 											mst_oem_id , 

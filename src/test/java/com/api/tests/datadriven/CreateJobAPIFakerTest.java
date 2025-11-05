@@ -10,14 +10,14 @@ import com.api.utils.SpecUtil;
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 // created by Ranjani
-public class CreateJobAPIDatDrivenTest {
+public class CreateJobAPIFakerTest {
 	
 
 	
 	@Test(description = "verifying the Create Api is able to create a new job", 
-			groups = { "api", "regression", "DataDriven","csv" },
+			groups = { "api", "regression", "DataDriven","faker" },
 			dataProviderClass = com.dataproviders.DataProviderUtils.class,
-			dataProvider = "CreateJobDataProvider")
+			dataProvider = "CreateJobAPIFakerDataProvider")
 	public void createJobApi(CreateJobPayload createJobPayload) {
 
 		RestAssured.given().spec(SpecUtil.requestSpecWithAuth(Role.FD, createJobPayload))
