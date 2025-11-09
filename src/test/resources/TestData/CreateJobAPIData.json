@@ -1,0 +1,122 @@
+[
+	
+	
+	{
+	    "mst_service_location_id": 0,
+	    "mst_platform_id": 2,
+	    "mst_warrenty_status_id": 1,
+	    "mst_oem_id": 2,
+	    "customer": {
+	        "first_name": "Ranjani",
+	        "last_name": "Manuel",
+	        "mobile_number": "9080730129",
+	        "mobile_number_alt": "",
+	        "email_id": "ranjanimanuel@gmail.com",
+	        "email_id_alt": ""
+	    },
+	    "customer_address": {
+	        "flat_number": "897",
+	        "apartment_name": "I dont know",
+	        "street_name": "aware of dogs street",
+	        "landmark": "opp of something",
+	        "area": "very good area",
+	        "pincode": "630554",
+	        "country": "India",
+	        "state": "Tamil Nadu"
+	    },
+	    "customer_product": {
+	        "dop": "2025-04-08T04:00:00.000Z",
+	        "serial_number": "1900832292458740",
+	        "imei1": "1900832292458740",
+	        "imei2": "1900832292458740",
+	        "popurl": "2025-04-08T04:00:00.000Z",
+	        "product_id": 3,
+	        "mst_model_id": 3
+	    },
+	    "problems": [
+	        {
+	            "id": 2,
+	            "remark": "Switching off frequently"
+	        }
+	    ]
+	},
+		{
+	    "mst_service_location_id": 0,
+	    "mst_platform_id": 2,
+	    "mst_warrenty_status_id": 1,
+	    "mst_oem_id": 2,
+	    "customer": {
+	        "first_name": "Ranjani",
+	        "last_name": "Manuel",
+	        "mobile_number": "9080730129",
+	        "mobile_number_alt": "",
+	        "email_id": "ranjanimanuel@gmail.com",
+	        "email_id_alt": ""
+	    },
+	    "customer_address": {
+	        "flat_number": "897",
+	        "apartment_name": "I dont know",
+	        "street_name": "aware of dogs street",
+	        "landmark": "opp of something",
+	        "area": "very good area",
+	        "pincode": "630554",
+	        "country": "India",
+	        "state": "Tamil Nadu"
+	    },
+	    "customer_product": {
+	        "dop": "2025-04-08T04:00:00.000Z",
+	        "serial_number": "1008329624587869",
+	        "imei1": "1008329624587869",
+	        "imei2": "1008329624587869",
+	        "popurl": "2025-04-08T04:00:00.000Z",
+	        "product_id": 3,
+	        "mst_model_id": 3
+	    },
+	    "problems": [
+	        {
+	            "id": 2,
+	            "remark": "Switching off frequently"
+	        }
+	    ]
+	},	
+	{
+	    "mst_service_location_id": 0,
+	    "mst_platform_id": 2,
+	    "mst_warrenty_status_id": 1,
+	    "mst_oem_id": 2,
+	    "customer": {
+	        "first_name": "Ranjani",
+	        "last_name": "Manuel",
+	        "mobile_number": "9080730129",
+	        "mobile_number_alt": "",
+	        "email_id": "ranjanimanuel@gmail.com",
+	        "email_id_alt": ""
+	    },
+	    "customer_address": {
+	        "flat_number": "897",
+	        "apartment_name": "I dont know",
+	        "street_name": "aware of dogs street",
+	        "landmark": "opp of something",
+	        "area": "very good area",
+	        "pincode": "630554",
+	        "country": "India",
+	        "state": "Tamil Nadu"
+	    },
+	    "customer_product": {
+	        "dop": "2025-04-08T04:00:00.000Z",
+	        "serial_number": "10083929245872193",
+	        "imei1": "10083929245872193",
+	        "imei2": "10083929245872193",
+	        "popurl": "2025-04-08T04:00:00.000Z",
+	        "product_id": 3,
+	        "mst_model_id": 3
+	    },
+	    "problems": [
+	        {
+	            "id": 2,
+	            "remark": "Switching off frequently"
+	        }
+	    ]
+	}
+	
+]
