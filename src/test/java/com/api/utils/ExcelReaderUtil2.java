@@ -2,22 +2,35 @@ package com.api.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.api.request.model.UserCredential;
+import com.poiji.bind.Poiji;
 
 public class ExcelReaderUtil2 {
 	private ExcelReaderUtil2() {
 		// TODO Auto-generated constructor stub
 	}
-	public static Iterator<UserCredential> loadExcel(){
+	public static <T> Iterator<T> loadExcel(String sheetName, Class<T> clazz){
+		
+		InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("TestData/PhoenixTestData.xlsx");
+		
+		XSSFWorkbook workbook = null;
+		try {
+			workbook = new XSSFWorkbook(inputStream);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		XSSFSheet sheet = workbook.getSheet(sheetName);		
+		List<T> list = Poiji.fromExcel(sheet, clazz);	
+		return list.iterator();
+	}
+	
+	/*public static Iterator<UserCredential> loadExcel(	){
 		
 		InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("TestData/PhoenixTestData.xlsx");
 		
@@ -63,5 +76,23 @@ public class ExcelReaderUtil2 {
 		return userList.iterator();
 		
 	}
+	public static Iterator<UserBean> loadExcel(){
+		
+		InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("TestData/PhoenixTestData.xlsx");
+		
+		XSSFWorkbook workbook = null;
+		try {
+			workbook = new XSSFWorkbook(inputStream);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		XSSFSheet sheet = workbook.getSheet("Sheet1");
+		
+		XSSFRow headerRow=sheet.getRow(0);
+		
+		List<UserBean> list = Poiji.fromExcel(sheet, UserBean.class);	
+		return list.iterator();
+	}*/
 
 }

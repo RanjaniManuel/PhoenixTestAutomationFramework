@@ -5,8 +5,8 @@ import static io.restassured.RestAssured.given;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
-import com.api.request.model.UserCredential;
 import com.api.utils.SpecUtil;
+import com.dataproviders.api.bean.UserBean;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
 
@@ -19,10 +19,10 @@ public class LoginApiTestExcelDataDrivenTest {
 			groups = {"api","regression","smoke"},
 			dataProviderClass = com.dataproviders.DataProviderUtils.class,
 			dataProvider = "LoginAPIExcelnDataProvider"	)
-	public void loginTest(UserCredential credential) {
+	public void loginTest(UserBean bean) {
 
 		given()
-			.spec(SpecUtil.requestSpec(credential))
+			.spec(SpecUtil.requestSpec(bean))
 		.when()
 			.post("login")
 		.then()
