@@ -14,12 +14,13 @@ public class ExcelReaderUtil2 {
 	private ExcelReaderUtil2() {
 		// TODO Auto-generated constructor stub
 	}
-	public static <T> Iterator<T> loadExcel(String sheetName, Class<T> clazz){
+	public static <T> Iterator<T> loadExcel(String fileName, String sheetName, Class<T> clazz){
 		
-		InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("TestData/PhoenixTestData.xlsx");
-		
+		InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
+		System.out.println("Hai");
 		XSSFWorkbook workbook = null;
 		try {
+			
 			workbook = new XSSFWorkbook(inputStream);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
