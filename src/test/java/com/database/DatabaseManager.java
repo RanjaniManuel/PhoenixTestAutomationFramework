@@ -43,7 +43,7 @@ public class DatabaseManager {
 					hikariDataSource=new HikariDataSource(hikariConfig);
 				}
 			}
-			System.out.println(connection);
+			
 			//return connection;
 
 		}
