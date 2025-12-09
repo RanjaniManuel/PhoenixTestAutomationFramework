@@ -68,7 +68,7 @@ public class CreateJobAPIWithDBValidationTest {
 	
 	@Test(description = "verifying the Create Api is able to create a new job", groups = { "api", "regression",
 	"smoke" })
-	public void createJobApiOld() {
+	public void createJobApi() {
 		
 		Response response=RestAssured.given()
 				.spec(SpecUtil.requestSpecWithAuth(Role.FD, createJobPayload))
