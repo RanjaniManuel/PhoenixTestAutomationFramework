@@ -22,7 +22,6 @@ import com.api.request.model.Customer;
 import com.api.request.model.CustomerAddress;
 import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
-import com.api.response.model.CreateJobResponseModel;
 import com.api.utils.DateTimeUtil;
 import com.api.utils.SpecUtil;
 import com.database.dao.CustomerAddressDao;
@@ -66,69 +65,7 @@ public class CreateJobAPIWithDBValidationTest {
 				problemArray);
 	}
 
-	@Test(description = "verifying the Create Api is able to create a new job", groups = { "api", "regression",
-			"smoke" })
-	public void createJobApi() {
-
-		CreateJobResponseModel createJobResponseModel=RestAssured.given()
-				.spec(SpecUtil.requestSpecWithAuth(Role.FD, createJobPayload))
-				.when()
-				.post("job/create")
-				.then()
-				.spec(SpecUtil.responseSpec_OK())
-				.body(JsonSchemaValidator
-						.matchesJsonSchemaInClasspath("response-schema/createJobAPIResponseSchema.json"))
-				.body("message", Matchers.equalTo("Job created successfully. "))
-				.body("data.mst_service_location_id", Matchers.equalTo(1))
-				.body("data.job_number", Matchers.startsWith("JOB_"))
-				.extract().response().as(CreateJobResponseModel.class);
-			
-		
-		
-		System.out.println("___________________________________________________________________");
-		
-		int customerId=createJobResponseModel.getData().getTr_customer_id();
-		System.out.println(customerId);
-		
-		
-		int productId=createJobResponseModel.getData().getTr_customer_product_id();
-		
-		CustomerDBModel customerDB = CustomerDao.getCustomerInfo(customerId);
-		Assert.assertEquals( customerDB.getFirst_name(),customer.first_name());
-		Assert.assertEquals(customerDB.getLast_name(),customer.last_name());
-		Assert.assertEquals( customerDB.getEmail_id(),customer.email_id());
-		Assert.assertEquals( customerDB.getEmail_id_alt(),customer.email_id_alt());
-		Assert.assertEquals( customerDB.getMobile_number(),customer.mobile_number());
-		Assert.assertEquals( customerDB.getMobile_number_alt(),customer.mobile_number_alt());
-		
-		CustomerAddressDBModel addressFromDB = CustomerAddressDao.getAddress(customerDB.getTr_customer_address_id());
-		
-		Assert.assertEquals(addressFromDB.getApartment_name(), customerAddress.apartment_name());
-		Assert.assertEquals(addressFromDB.getArea(), customerAddress.area());
-		Assert.assertEquals(addressFromDB.getStreet_name(), customerAddress.street_name());
-		Assert.assertEquals(addressFromDB.getLandmark(), customerAddress.landmark());
-		Assert.assertEquals(addressFromDB.getPincode(), customerAddress.pincode());
-		Assert.assertEquals(addressFromDB.getState(), customerAddress.state());
-		Assert.assertEquals(addressFromDB.getCountry(), customerAddress.country());
-		Assert.assertEquals(addressFromDB.getFlat_number(), customerAddress.flat_number());
-		
-		CustomerProductDBModel customerProductFromDB = CustomerProductDao.getCustomerProductDetail(productId);
-		System.out.println(customerProductFromDB);
-		
-		
-		Assert.assertEquals(customerProductFromDB.getDop(), customerProduct.dop());
-		Assert.assertEquals(customerProductFromDB.getSerial_number(), customerProduct.serial_number());
-		Assert.assertEquals(customerProductFromDB.getImei1(), customerProduct.imei1());
-		Assert.assertEquals(customerProductFromDB.getImei2(), customerProduct.imei2());
-		Assert.assertEquals(customerProductFromDB.getPopurl(), customerProduct.popurl());
 	
-		Assert.assertEquals(customerProductFromDB.getMst_model_id(), customerProduct.mst_model_id());
-		
-		
-	
-		
-		
-	}
 	@Test(description = "verifying the Create Api is able to create a new job", groups = { "api", "regression",
 	"smoke" })
 	public void createJobApiOld() {
