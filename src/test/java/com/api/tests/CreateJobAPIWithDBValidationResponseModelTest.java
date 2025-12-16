@@ -28,10 +28,12 @@ import com.api.utils.SpecUtil;
 import com.database.dao.CustomerAddressDao;
 import com.database.dao.CustomerDao;
 import com.database.dao.CustomerProductDao;
+import com.database.dao.JobHeadDao;
 import com.database.dao.MapJobProblemDao;
 import com.db.model.CustomerAddressDBModel;
 import com.db.model.CustomerDBModel;
 import com.db.model.CustomerProductDBModel;
+import com.db.model.JobHeadModel;
 import com.db.model.MapJobProblemModel;
 
 import io.restassured.RestAssured;
@@ -122,6 +124,13 @@ public class CreateJobAPIWithDBValidationResponseModelTest {
 		
 		Assert.assertEquals(problemDetailFromDB.getMst_problem_id(), createJobPayload.problems().get(0).id());
 		Assert.assertEquals(problemDetailFromDB.getRemark(), createJobPayload.problems().get(0).remark());
+		
+		
+		JobHeadModel jobHeadDetailFromDB = JobHeadDao.getJobHeadDetail(customerId);
+		Assert.assertEquals(jobHeadDetailFromDB.getMst_oem_id(), createJobPayload.mst_oem_id(), "mst oem id is incorrect");
+		Assert.assertEquals(jobHeadDetailFromDB.getMst_platform_id(), createJobPayload.mst_platform_id(),"mst platform id is incorrect");
+		Assert.assertEquals(jobHeadDetailFromDB.getMst_service_location_id(), createJobPayload.mst_service_location_id(),"mst service id is incorrect");
+		Assert.assertEquals(jobHeadDetailFromDB.getMst_warrenty_status_id(), createJobPayload.mst_warrenty_status_id(),"mst warrenty status id is incorrect");
 		
 		
 		CustomerProductDBModel customerProductFromDB = CustomerProductDao.getCustomerProductDetail(productId);
