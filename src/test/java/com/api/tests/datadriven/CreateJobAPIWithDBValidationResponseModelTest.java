@@ -1,4 +1,4 @@
-package com.api.tests;
+package com.api.tests.datadriven;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +86,7 @@ public class CreateJobAPIWithDBValidationResponseModelTest {
 				.body("data.job_number", Matchers.startsWith("JOB_"))
 				.extract().response().as(CreateJobResponseModel.class);
 			
-		
+		//CreateJobAPIWithDBValidationTest
 		
 		System.out.println("___________________________________________________________________");
 		
