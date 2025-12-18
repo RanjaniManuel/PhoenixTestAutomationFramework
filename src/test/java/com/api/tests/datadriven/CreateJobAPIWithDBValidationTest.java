@@ -1,4 +1,4 @@
-package com.api.tests;
+package com.api.tests.datadriven;
 
 import java.util.ArrayList;
 import java.util.List;
