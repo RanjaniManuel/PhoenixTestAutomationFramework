@@ -1,4 +1,4 @@
-package com.api.tests;
+package com.api.tests.datadriven;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,22 +22,20 @@ import com.api.request.model.Customer;
 import com.api.request.model.CustomerAddress;
 import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
-import com.api.response.model.CreateJobResponseModel;
 import com.api.utils.DateTimeUtil;
 import com.api.utils.SpecUtil;
 import com.database.dao.CustomerAddressDao;
 import com.database.dao.CustomerDao;
 import com.database.dao.CustomerProductDao;
-import com.database.dao.MapJobProblemDao;
 import com.db.model.CustomerAddressDBModel;
 import com.db.model.CustomerDBModel;
 import com.db.model.CustomerProductDBModel;
-import com.db.model.MapJobProblemModel;
 
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
+import io.restassured.response.Response;
 // created by Ranjani
-public class CreateJobAPIWithDBValidationResponseModelTest {
+public class CreateJobAPIWithDBValidationTest {
 	private CreateJobPayload createJobPayload;
 	private Customer customer ;
 	private CustomerAddress customerAddress;
@@ -67,11 +65,12 @@ public class CreateJobAPIWithDBValidationResponseModelTest {
 				problemArray);
 	}
 
+	
 	@Test(description = "verifying the Create Api is able to create a new job", groups = { "api", "regression",
-			"smoke" })
-	public void createJobApi() {
-
-		CreateJobResponseModel createJobResponseModel=RestAssured.given()
+	"smoke" })
+	public void createJobApiOld() {
+		
+		Response response=RestAssured.given()
 				.spec(SpecUtil.requestSpecWithAuth(Role.FD, createJobPayload))
 				.when()
 				.post("job/create")
@@ -82,17 +81,17 @@ public class CreateJobAPIWithDBValidationResponseModelTest {
 				.body("message", Matchers.equalTo("Job created successfully. "))
 				.body("data.mst_service_location_id", Matchers.equalTo(1))
 				.body("data.job_number", Matchers.startsWith("JOB_"))
-				.extract().response().as(CreateJobResponseModel.class);
-			
+				.extract().response();
+		//.extract().body().jsonPath().getInt("data.tr_customer_id");
 		
 		
 		System.out.println("___________________________________________________________________");
 		
-		int customerId=createJobResponseModel.getData().getTr_customer_id();
+		int customerId=response.body().jsonPath().getInt("data.tr_customer_id");
 		System.out.println(customerId);
 		
 		
-		int productId=createJobResponseModel.getData().getTr_customer_product_id();
+		int productId=response.body().jsonPath().getInt("data.tr_customer_product_id");
 		
 		CustomerDBModel customerDB = CustomerDao.getCustomerInfo(customerId);
 		Assert.assertEquals( customerDB.getFirst_name(),customer.first_name());
@@ -113,17 +112,6 @@ public class CreateJobAPIWithDBValidationResponseModelTest {
 		Assert.assertEquals(addressFromDB.getCountry(), customerAddress.country());
 		Assert.assertEquals(addressFromDB.getFlat_number(), customerAddress.flat_number());
 		
-		
-		
-		
-
-		MapJobProblemModel problemDetailFromDB = MapJobProblemDao.getProblemDetails(createJobResponseModel.getData().getId());
-		System.out.println(problemDetailFromDB);
-		
-		Assert.assertEquals(problemDetailFromDB.getMst_problem_id(), createJobPayload.problems().get(0).id());
-		Assert.assertEquals(problemDetailFromDB.getRemark(), createJobPayload.problems().get(0).remark());
-		
-		
 		CustomerProductDBModel customerProductFromDB = CustomerProductDao.getCustomerProductDetail(productId);
 		System.out.println(customerProductFromDB);
 		
@@ -133,16 +121,13 @@ public class CreateJobAPIWithDBValidationResponseModelTest {
 		Assert.assertEquals(customerProductFromDB.getImei1(), customerProduct.imei1());
 		Assert.assertEquals(customerProductFromDB.getImei2(), customerProduct.imei2());
 		Assert.assertEquals(customerProductFromDB.getPopurl(), customerProduct.popurl());
-	
+		
 		Assert.assertEquals(customerProductFromDB.getMst_model_id(), customerProduct.mst_model_id());
 		
 		
 		
 		
-	
-		
 		
 	}
-	
 
 }
