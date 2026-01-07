@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.api.request.model.UserCredential;
+import com.api.services.AuthService;
 import com.api.utils.SpecUtil;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -15,22 +16,20 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 public class LoginApiTest {
 	
 	private UserCredential credential;
+	private AuthService authService;
 	@BeforeMethod
 	public void setup() {
 		
 		credential=new UserCredential("iamfd","password");
-		
+		authService=new AuthService();
 	}
 
 	@Test(description = "verifying the login api is able to login for FD user", groups = {"api","regression","smoke"})
 	
 	public void loginTest() {
 
-		given()
-			.spec(SpecUtil.requestSpec(credential))
-		.when()
-			.post("login")
-		.then()
+		authService.login(credential)
+			.then()
 			.spec(SpecUtil.responseSpec_OK())
 			.body("message", Matchers.equalTo("Success"))
 			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/loginSchema.json"))
