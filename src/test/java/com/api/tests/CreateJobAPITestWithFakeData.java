@@ -9,6 +9,7 @@ import com.api.constants.Role;
 import com.api.request.model.CreateJobPayload;
 import com.api.request.model.Customer;
 import com.api.request.model.CustomerAddress;
+import com.api.services.JobService;
 import com.api.utils.FakerDataGenerator;
 import com.api.utils.SpecUtil;
 import com.database.dao.CustomerAddressDao;
@@ -16,26 +17,26 @@ import com.database.dao.CustomerDao;
 import com.db.model.CustomerAddressDBModel;
 import com.db.model.CustomerDBModel;
 
-import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 // created by Ranjani
 public class CreateJobAPITestWithFakeData {
 	private CreateJobPayload createJobPayload;
+	private JobService jobService ;
 	
 
-	@BeforeMethod(description = "Creating CreateJob Api request payload")
+	@BeforeMethod(description = "Instantiating Job Service class")
 	public void setUp() {
 				
 		 createJobPayload=FakerDataGenerator.generateFakeCreateJobData();
-		
-		
-	}
+		 jobService=new JobService();
+		}
 
 	@Test(description = "verifying the Create Api is able to create a new job", groups = { "api", "regression",
 			"smoke" })
 	public void createJobApi() {
 
-		int customerId = RestAssured.given().spec(SpecUtil.requestSpecWithAuth(Role.FD, createJobPayload)).when().post("job/create").then()
+		int customerId = jobService.create(Role.FD, createJobPayload)
+				.then()
 				.spec(SpecUtil.responseSpec_OK())
 				.body(JsonSchemaValidator
 						.matchesJsonSchemaInClasspath("response-schema/createJobAPIResponseSchema.json"))

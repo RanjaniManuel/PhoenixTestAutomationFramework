@@ -23,6 +23,7 @@ import com.api.request.model.CustomerAddress;
 import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
 import com.api.response.model.CreateJobResponseModel;
+import com.api.services.JobService;
 import com.api.utils.DateTimeUtil;
 import com.api.utils.SpecUtil;
 import com.database.dao.CustomerAddressDao;
@@ -36,7 +37,6 @@ import com.db.model.CustomerProductDBModel;
 import com.db.model.JobHeadModel;
 import com.db.model.MapJobProblemModel;
 
-import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 // created by Ranjani
 public class CreateJobAPIWithDBValidationResponseModelTest {
@@ -44,6 +44,7 @@ public class CreateJobAPIWithDBValidationResponseModelTest {
 	private Customer customer ;
 	private CustomerAddress customerAddress;
 	private CustomerProduct customerProduct;
+	private JobService jobService ;
 
 	@BeforeMethod(description = "Creating CreateJob Api request payload")
 	public void setUp() {
@@ -67,16 +68,15 @@ public class CreateJobAPIWithDBValidationResponseModelTest {
 		createJobPayload = new CreateJobPayload(ServiceCenter.SERVICE_CENTER_A.getCode(), Platform.FRONT_DESK.getCode(),
 				WarrentyStatus.IN_WARRENTY.getCode(), OEM.GOOGLE.getCode(), customer, customerAddress, customerProduct,
 				problemArray);
+		 jobService=new JobService();
+
 	}
 
 	@Test(description = "verifying the Create Api is able to create a new job", groups = { "api", "regression",
 			"smoke" })
 	public void createJobApi() {
 
-		CreateJobResponseModel createJobResponseModel=RestAssured.given()
-				.spec(SpecUtil.requestSpecWithAuth(Role.FD, createJobPayload))
-				.when()
-				.post("job/create")
+		CreateJobResponseModel createJobResponseModel=jobService.create(Role.FD, createJobPayload)
 				.then()
 				.spec(SpecUtil.responseSpec_OK())
 				.body(JsonSchemaValidator
