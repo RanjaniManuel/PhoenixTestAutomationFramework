@@ -9,7 +9,6 @@ import com.api.request.model.CreateJobPayload;
 import com.api.services.JobService;
 import com.api.utils.SpecUtil;
 
-import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 // created by Ranjani
 public class CreateJobAPIExcelTest {
