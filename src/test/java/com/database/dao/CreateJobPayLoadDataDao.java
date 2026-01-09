@@ -7,8 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.api.request.model.CreateJobPayload;
-import com.api.utils.CreateJobMapper;
 import com.database.DatabaseManager;
 import com.dataproviders.api.bean.CreateJobBean;
 

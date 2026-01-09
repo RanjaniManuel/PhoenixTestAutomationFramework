@@ -1,11 +1,11 @@
 package com.api.tests.datadriven;
 
-import static io.restassured.RestAssured.given;
-
 import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.api.request.model.UserCredential;
+import com.api.services.AuthService;
 import com.api.utils.SpecUtil;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -13,7 +13,12 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class LoginApiTestJSONDataDrivenTest {
 	
+	private AuthService authService;
 	
+	@BeforeTest(description = " Initializing Auth Service")
+	public void setUp() {
+		authService=new AuthService();
+	}
 
 	@Test(description = "verifying the login api is able to login for FD user", 
 			groups = {"api","regression","smoke"},
@@ -25,10 +30,7 @@ public class LoginApiTestJSONDataDrivenTest {
 	
 	public void loginTest(UserCredential credential) {
 
-		given()
-			.spec(SpecUtil.requestSpec(credential))
-		.when()
-			.post("login")
+		authService.login(credential)
 		.then()
 			.spec(SpecUtil.responseSpec_OK())
 			.body("message", Matchers.equalTo("Success"))

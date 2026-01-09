@@ -71,6 +71,7 @@ public class SpecUtil {
 		return requestSpecification;
 		
 	}
+	
 	public static ResponseSpecification responseSpec_OK() {
 		ResponseSpecification responseSpecification = new ResponseSpecBuilder()
 				.expectStatusCode(200)

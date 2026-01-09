@@ -1,18 +1,27 @@
 package com.api.tests.datadriven;
 
 import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.api.constants.Role;
 import com.api.request.model.CreateJobPayload;
+import com.api.services.JobService;
 import com.api.utils.SpecUtil;
 
-import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 // created by Ranjani
 public class CreateJobAPIExcelTest {
 	
+private JobService jobService ;
+	
 
+	@BeforeMethod(description = "Instantiating Job Service class")
+	public void setUp() {
+				
+		 jobService=new JobService();
+		
+	}
 	
 	@Test(description = "verifying the Create Api is able to create a new job", 
 			groups = { "api", "regression", "dataDriven","excel" },
@@ -20,9 +29,8 @@ public class CreateJobAPIExcelTest {
 			dataProvider = "CreateJobAPIExcelDataProvider")
 	public void createJobApi(CreateJobPayload createJobPayload) {
 
-		RestAssured.given().spec(SpecUtil.requestSpecWithAuth(Role.FD, createJobPayload))
-					.when().post("job/create")
-					.then()
+				jobService.create(Role.FD, createJobPayload)
+				.then()
 				.spec(SpecUtil.responseSpec_OK())
 				.body(JsonSchemaValidator
 						.matchesJsonSchemaInClasspath("response-schema/createJobAPIResponseSchema.json"))

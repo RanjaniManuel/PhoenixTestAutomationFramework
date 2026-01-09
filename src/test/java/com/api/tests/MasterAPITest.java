@@ -1,23 +1,25 @@
 package com.api.tests;
 
 import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.api.constants.Role;
+import com.api.services.MasterService;
 import com.api.utils.SpecUtil;
 
-import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class MasterAPITest {
+	private MasterService masterService;
+	@BeforeTest(description = "Instantiating the Master Service Object")
+	public void setup() {
+		masterService=new MasterService();
+	}
 	@Test(description = "verifying if Mater Api is able to give correct response", groups = {"api","regression","smoke"})
 
 	public void masterAPITest() {
-		RestAssured.given()
-			       .spec(SpecUtil.requestSpecWithAuth(Role.FD))
-			       .contentType("")
-			       .when()
-			       .post("master")
+		masterService.master(Role.FD)
 			       .then()
 			       .spec(SpecUtil.responseSpec_OK())
 			       .body("message", Matchers.equalTo("Success"))
@@ -45,11 +47,7 @@ public class MasterAPITest {
 
 	
 	public void masterAPITest_NoToken() {
-		RestAssured.given()
-	       .spec(SpecUtil.requestSpec())
-	       .contentType("")
-	       .when()
-	       .post("master")
+		masterService.master()
 	       .then()
 	       .spec(SpecUtil.responseSpec_Text(401))
 	       .log().ifValidationFails();
