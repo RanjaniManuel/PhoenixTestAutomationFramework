@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+	<appenders>
+		<Console  name="CONSOLE" >
+			<PatternLayout pattern="%d [%t] %highlights{%5p} %c::%M()-%L - %m%n"/>		
+		</Console>	
+	</appenders>
+
+	<loggers>
+		<root level="INFO">
+			<AppenderRef ref="CONSOLE"/>		
+		</root>	
+	</loggers>
+
+</configuration>
+

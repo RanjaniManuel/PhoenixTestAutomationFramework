@@ -9,22 +9,33 @@ import static io.restassured.RestAssured.given;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hamcrest.Matchers;
 
 import com.api.constants.Role;
 import com.api.request.model.UserCredential;
+import com.api.services.AuthService;
 
 import io.restassured.http.ContentType;
 
 public class AuthTokenProvider {
+	
+	private static final Logger LOGGER=LogManager.getLogger(AuthService.class);	
+	
 	private static Map<Role, String> tokenCache=new ConcurrentHashMap<Role, String>();
+	
+	
 	private AuthTokenProvider() {
-		// TODO Auto-generated constructor stub
 	}
+	
 	public static String getToken(Role role) {
-		
-		if(tokenCache.containsKey(role))
+		LOGGER.info("Checking if the token for the role {} is in cache ",role);
+		if(tokenCache.containsKey(role)) {
+			LOGGER.info("Token Found for the role {} is in cache ",role);
 			return tokenCache.get(role);
+		}
+		LOGGER.info("Token not found  and making login request for the role {}",role);
 		UserCredential credential=null;
 		if(role==FD) {
 			credential=new UserCredential("iamfd", "password");
@@ -51,9 +62,9 @@ public class AuthTokenProvider {
 		.body("message", Matchers.equalTo( "Success"))
 		.extract()
 		.body()
-		.jsonPath()
-	
+		.jsonPath()	
 		.getString("data.token");
+		LOGGER.info("Token cached for future request",role);
 		tokenCache.put(role, token);
 		return token;
 	}
