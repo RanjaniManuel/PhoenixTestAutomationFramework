@@ -4,9 +4,9 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.api.request.model.UserCredential;
 import com.api.services.AuthService;
 import com.api.utils.SpecUtil;
+import com.dataproviders.api.bean.UserBean;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
 
@@ -28,7 +28,7 @@ public class LoginApiTestJSONDataDrivenTest {
 			
 			)
 	
-	public void loginTest(UserCredential credential) {
+	public void loginTest(UserBean credential) {
 
 		authService.login(credential)
 		.then()
