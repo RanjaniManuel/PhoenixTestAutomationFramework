@@ -6,11 +6,15 @@
 		<Console  name="CONSOLE" >
 			<PatternLayout pattern="%d [%t] %highlights{%5p} %c::%M()-%L - %m%n"/>		
 		</Console>	
+		<File  name="FileAppender" fileName="logs/application.log" >
+			<PatternLayout pattern="%d [%t] %highlights{%5p} %c::%M()-%L - %m%n"/>		
+		</File>	
 	</appenders>
 
 	<loggers>
 		<root level="INFO">
 			<AppenderRef ref="CONSOLE"/>		
+			<AppenderRef ref="FileAppender"/>		
 		</root>	
 	</loggers>
 
