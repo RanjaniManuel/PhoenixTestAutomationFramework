@@ -1,19 +1,25 @@
 package com.api.utils;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class EnvUtil {
-
+	private static final Logger LOGGER=LogManager.getLogger(EnvUtil.class);
+	
 	public static Dotenv dotenv;
 	
 	static {
+		LOGGER.info("Loading .env file............");
 		dotenv= Dotenv.load();
 	}
 	
 	private EnvUtil() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	public static String getValue(String varName) {
+		LOGGER.info("Reading the value of {} form .env file",varName);
 		return dotenv.get(varName);
 	}
 }

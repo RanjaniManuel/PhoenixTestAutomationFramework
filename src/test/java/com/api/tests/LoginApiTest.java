@@ -2,23 +2,24 @@ package com.api.tests;
 
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import com.api.request.model.UserCredential;
 import com.api.services.AuthService;
 import com.api.utils.SpecUtil;
+import com.dataproviders.api.bean.UserBean;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
 
-
+@Listeners(com.listeners.APITestListener.class)
 public class LoginApiTest {
 	
-	private UserCredential credential;
+	private UserBean credential;
 	private AuthService authService;
 	@BeforeMethod
 	public void setup() {
 		
-		credential=new UserCredential("iamfd","password");
+		credential=new UserBean("iamfd","password");
 		authService=new AuthService();
 	}
 
