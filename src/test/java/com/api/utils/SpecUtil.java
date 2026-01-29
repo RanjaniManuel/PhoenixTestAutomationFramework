@@ -2,6 +2,7 @@ package com.api.utils;
 
 import org.hamcrest.Matchers;
 
+import com.aoi.filters.SensitiveDataFilter;
 import com.api.constants.Role;
 
 import io.restassured.builder.RequestSpecBuilder;
@@ -34,10 +35,11 @@ public class SpecUtil {
 					.setContentType(ContentType.JSON)
 					.setAccept(ContentType.JSON)
 					.setBody(credential)
+					.addFilter(new SensitiveDataFilter())
 					.log(LogDetail.URI)
 					.log(LogDetail.HEADERS)
 					.log(LogDetail.METHOD)
-					.log(LogDetail.BODY)
+					//.log(LogDetail.BODY)
 					.build();
 		return requestSpecification;
 		
@@ -51,7 +53,7 @@ public class SpecUtil {
 				.log(LogDetail.URI)
 				.log(LogDetail.HEADERS)
 				.log(LogDetail.METHOD)
-				.log(LogDetail.BODY)
+				//.log(LogDetail.BODY)
 				.build();
 		return requestSpecification;
 		
@@ -66,7 +68,7 @@ public class SpecUtil {
 				.log(LogDetail.URI)
 				.log(LogDetail.HEADERS)
 				.log(LogDetail.METHOD)
-				.log(LogDetail.BODY)
+				//.log(LogDetail.BODY)
 				.build();
 		return requestSpecification;
 		
@@ -77,7 +79,7 @@ public class SpecUtil {
 				.expectStatusCode(200)
 				.expectContentType(ContentType.JSON)
 				.expectResponseTime(Matchers.lessThan(15000L))
-				.log(LogDetail.ALL)
+			//	.log(LogDetail.ALL)
 				.build();
 		return responseSpecification;
 	}
@@ -86,7 +88,7 @@ public class SpecUtil {
 				.expectStatusCode(statusCode)
 				.expectContentType(ContentType.JSON)
 				.expectResponseTime(Matchers.lessThan(15000L))
-				.log(LogDetail.ALL)
+				//.log(LogDetail.ALL)
 				.build();
 		return responseSpecification;
 	}
@@ -95,7 +97,7 @@ public class SpecUtil {
 				.expectStatusCode(statusCode)
 				.expectContentType(ContentType.HTML)
 				.expectResponseTime(Matchers.lessThan(15000L))
-				.log(LogDetail.ALL)
+				//.log(LogDetail.ALL)
 				.build();
 		return responseSpecification;
 	}

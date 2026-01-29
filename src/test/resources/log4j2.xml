@@ -4,10 +4,10 @@
 
 	<appenders>
 		<Console  name="CONSOLE" >
-			<PatternLayout pattern="%d [%t] %highlights{%5p} %c::%M()-%L - %m%n"/>		
+			<PatternLayout pattern="%d{DD-MM-YYYY HH:mm:SS} [%t] %highlights{%5p} %c{1}::%M()-%L - %m%n"/>		
 		</Console>	
 		<File  name="FileAppender" fileName="logs/application.log" >
-			<PatternLayout pattern="%d [%t] %highlights{%5p} %c::%M()-%L - %m%n"/>		
+			<PatternLayout pattern="%d{DD-MM-YYYY HH:mm:SS} [%t] %highlights{%5p} %c{1}::%M()-%L - %m%n"/>		
 		</File>	
 	</appenders>
 
