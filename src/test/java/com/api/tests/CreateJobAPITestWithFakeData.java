@@ -3,6 +3,7 @@ package com.api.tests;
 import org.hamcrest.Matchers;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.api.constants.Role;
@@ -19,6 +20,9 @@ import com.db.model.CustomerDBModel;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
 // created by Ranjani
+
+
+@Listeners(com.listeners.APITestListener.class)
 public class CreateJobAPITestWithFakeData {
 	private CreateJobPayload createJobPayload;
 	private JobService jobService ;
