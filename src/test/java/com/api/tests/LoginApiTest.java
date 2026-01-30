@@ -31,8 +31,8 @@ public class LoginApiTest {
 			.then()
 			.spec(SpecUtil.responseSpec_OK())
 			.body("message", Matchers.equalTo("Success"))
-			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/loginSchema.json"))
-			.log().all();
+			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/loginSchema.json"));
+			//.log().all();
 	}
 	
 
