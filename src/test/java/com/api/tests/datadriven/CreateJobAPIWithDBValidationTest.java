@@ -7,6 +7,7 @@ import java.util.Random;
 import org.hamcrest.Matchers;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.api.constants.Model;
@@ -34,6 +35,7 @@ import com.db.model.CustomerProductDBModel;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
+@Listeners(com.listeners.APITestListener.class)
 // created by Ranjani
 public class CreateJobAPIWithDBValidationTest {
 	private CreateJobPayload createJobPayload;
