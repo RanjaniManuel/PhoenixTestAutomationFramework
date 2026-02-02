@@ -1,6 +1,11 @@
 package com.api.tests;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.anyOf;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.everyItem;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.nullValue;
+
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -10,8 +15,19 @@ import com.api.request.model.Detail;
 import com.api.services.DashboardService;
 import com.api.utils.SpecUtil;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
+
 
 @Listeners(com.listeners.APITestListener.class)
+
+
+@Epic("Job Management")
+@Feature("Job Details")
 public class DetailAPITest {
 	
 	
@@ -23,7 +39,9 @@ public class DetailAPITest {
 		dashboardService=new DashboardService();
 		detailPayload=new Detail("created_today");
 	}
-	
+	@Story("Job Detail should be shown for FD")
+	@Description("Verifing if  detail api is working ")
+	@Severity(SeverityLevel.CRITICAL)
 	@Test(description = "Verifing if  detail api is working ", groups = {"api", "smoke","regression"})
 	public void detailAPITest() {
 		/*
