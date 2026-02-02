@@ -16,7 +16,7 @@ public class ConfigManager {
 	}
 	private static Properties prop = new Properties();
 	private static String path = "config/config.properties";
-	private static String env;
+	public static String env;
 	static {
 		LOGGER.info("Reading env value from terminal");
 		if(System.getProperty("env")==null) {
