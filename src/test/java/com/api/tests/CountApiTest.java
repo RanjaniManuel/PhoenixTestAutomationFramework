@@ -9,9 +9,18 @@ import com.api.constants.Role;
 import com.api.services.DashboardService;
 import com.api.utils.SpecUtil;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 @Listeners(com.listeners.APITestListener.class)
+
+@Epic("Job Management")
+@Feature("Job Count")
 public class CountApiTest {
 	private DashboardService dashboardService;
 	
@@ -19,7 +28,9 @@ public class CountApiTest {
 	public void setup() {
 		dashboardService=new DashboardService();
 	}
-	
+	@Story("Job Count detail should be shown for FD")
+	@Description("verifying the Count api gives correct response")
+	@Severity(SeverityLevel.CRITICAL)
 	@Test(description = "verifying the Count api gives correct response", groups = {"api","regression","smoke"})
 	public void verifyCountApiResponse() {
 					dashboardService.count(Role.FD)
@@ -35,6 +46,9 @@ public class CountApiTest {
 					
 
 	}
+	@Story("Job Count detail should not be shown for Invalid Token")
+	@Description("verifying the count api gives correct response for invalid token")
+	@Severity(SeverityLevel.CRITICAL)
 	@Test(description = "verifying the count api gives correct response for invalid token", groups = {"api","negative","regression","smoke"})
 	public void verifyCountApi_missingAuthToken() {
 		dashboardService.count()

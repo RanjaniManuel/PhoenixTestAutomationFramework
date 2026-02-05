@@ -12,13 +12,16 @@ import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
+import io.qameta.allure.Step;
+
 public class CSVReaderUtil {
 	
 	private static final Logger LOGGER=LogManager.getLogger(CSVReaderUtil.class);
 	
 
 	private CSVReaderUtil() {
-	} 
+	}
+	@Step("Loading Test Data from CSV file")
 	public static <T> Iterator<T> loadCsv(String pathOfCSVFile, Class<T> bean) {
 		LOGGER.info("Loading CSV file from the path {}",pathOfCSVFile);
 		InputStream inputStream= Thread.currentThread().getContextClassLoader().getResourceAsStream(pathOfCSVFile);

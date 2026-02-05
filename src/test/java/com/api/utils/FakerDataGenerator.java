@@ -16,6 +16,8 @@ import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
 import com.github.javafaker.Faker;
 
+import io.qameta.allure.Step;
+
 public class FakerDataGenerator {
 	private static final Logger LOGGER=LogManager.getLogger(FakerDataGenerator.class);
 	
@@ -35,7 +37,7 @@ public class FakerDataGenerator {
 	private FakerDataGenerator() {
 		// TODO Auto-generated constructor stub
 	}
-
+	@Step("Generating Fake data to Create Job")
 	public static CreateJobPayload generateFakeCreateJobData() {
 		LOGGER.info("Generating Fake payload for Create Job ");
 
@@ -48,7 +50,7 @@ public class FakerDataGenerator {
 				customer, customerAddress, customerProduct, problemList);
 
 	}
-
+	@Step("Generating multiple Fake data to Create Jobs")
 	public static Iterator<CreateJobPayload> generateFakeCreateJobData(int count) {
 		LOGGER.info("Generating Fake {} payloads for Create Job ",count);
 		List<CreateJobPayload> payLoadList = new ArrayList<CreateJobPayload>();
@@ -65,7 +67,7 @@ public class FakerDataGenerator {
 		}
 		return payLoadList.iterator();
 	}
-
+	@Step("Generating Fake list of problems for Create job payload")
 	private static List<Problems> generateFakeListProblems() {
 
 		int count = random.nextInt(1, 4);
@@ -81,7 +83,7 @@ public class FakerDataGenerator {
 		}
 		return list;
 	}
-
+	@Step("Generating Fake Customer Product data for Create job payload")
 	private static CustomerProduct generateFakeCustomerProductData() {
 
 		String dop = DateTimeUtil.getTimeWithDaysAgo(10);
@@ -91,7 +93,7 @@ public class FakerDataGenerator {
 		return new CustomerProduct(dop, serial_number, serial_number, serial_number, popurl, PRODUCT_ID, MST_MODEL_ID);
 
 	}
-
+	@Step("Generating Fake Customer Address data for Create job payload")
 	private static CustomerAddress generateFakeCustomerAddressData() {
 		String flat_number = faker.numerify("###");
 		String apartment_name = faker.address().streetName();
@@ -105,7 +107,7 @@ public class FakerDataGenerator {
 				pincode, COUNTRY, state);
 		return customerAddress;
 	}
-
+	@Step("Generating Fake Customer data for Create job payload")
 	private static Customer generateFakeCustomerData() {
 		String first_name = faker.name().firstName();
 		String last_name = faker.name().lastName();

@@ -12,6 +12,8 @@ import com.api.utils.VaultDBConfig;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+import io.qameta.allure.Step;
+
 public class DatabaseManager {
 	private static final Logger LOGGER=LogManager.getLogger(DatabaseManager.class);
 
@@ -41,13 +43,13 @@ public class DatabaseManager {
 	private DatabaseManager() {
 		// TODO Auto-generated constructor stub
 	}
-
+	@Step("Loading Secret from  the Vault")
 	public static String loadSecret(String key) {
 		String value =null;
 		if (isVaultUp) {
 			 value = VaultDBConfig.getSecret(key);
 			if (value == null) {
-				LOGGER.error("Vault  is down or Some issue with vault");
+				LOGGER.error("Vault is down or Some issue with vault");
 				isVaultUp=false;
 			} else {
 				
@@ -60,7 +62,7 @@ public class DatabaseManager {
 
 		return value;
 	}
-
+	@Step("Initializing the Database Connection Pool")
 	private static void initializePool() {
 		if (hikariDataSource == null) {
 			synchronized (DatabaseManager.class) {
@@ -77,7 +79,7 @@ public class DatabaseManager {
 					hikariConfig.setPoolName(HIKARI_CP_POOL_NAME);
 
 					hikariDataSource = new HikariDataSource(hikariConfig);
-					LOGGER.warn(" HikariDataSource is created!!!");
+					LOGGER.info(" HikariDataSource is created!!!");
 					
 				}
 			}
@@ -86,7 +88,7 @@ public class DatabaseManager {
 
 		}
 	}
-
+	@Step("Getting the Database Connection ")
 	public static Connection getConnection() throws SQLException {
 		if (hikariDataSource == null) {
 

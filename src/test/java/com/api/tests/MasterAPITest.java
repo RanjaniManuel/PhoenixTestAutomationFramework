@@ -9,15 +9,28 @@ import com.api.constants.Role;
 import com.api.services.MasterService;
 import com.api.utils.SpecUtil;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 @Listeners(com.listeners.APITestListener.class)
+
+@Epic("Job Management")
+@Feature("Master API")
 public class MasterAPITest {
 	private MasterService masterService;
 	@BeforeTest(description = "Instantiating the Master Service Object")
 	public void setup() {
 		masterService=new MasterService();
 	}
+	
+	@Story("Master API bring OEM details, Problem type, Warranty Status")
+	@Description("verifying if Mater Api is able to give correct response")
+	@Severity(SeverityLevel.BLOCKER)
 	@Test(description = "verifying if Mater Api is able to give correct response", groups = {"api","regression","smoke"})
 
 	public void masterAPITest() {
