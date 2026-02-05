@@ -13,12 +13,15 @@ import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
 import com.dataproviders.api.bean.CreateJobBean;
 
+import io.qameta.allure.Step;
+
 public class CreateJobMapper {
 	private static final Logger LOGGER=LogManager.getLogger(CreateJobMapper.class);
 	
 	
 	private CreateJobMapper() {
 	}
+	@Step("Converting CreateJobBean to CreateJobPayload ")
 	public static CreateJobPayload mapper(CreateJobBean bean) {
 		
 		//csv file values are all String . we need to convert them according  our need

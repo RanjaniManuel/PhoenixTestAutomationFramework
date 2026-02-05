@@ -11,13 +11,15 @@ import org.apache.logging.log4j.Logger;
 import com.database.DatabaseManager;
 import com.db.model.CustomerDBModel;
 
+import io.qameta.allure.Step;
+
 public class CustomerDao {
 	private static final Logger LOGGER = LogManager.getLogger(CustomerDao.class);
 
 	private final static String CUSTOMER_DETAIL_QUERY = """
 			select * from tr_customer where id =  ?;
 			""";
-
+	@Step("Retriving the Customer info data from Database for a specific customer id")
 	public static CustomerDBModel getCustomerInfo(int customerId) {
 		CustomerDBModel customerDBModel = null;
 		try {

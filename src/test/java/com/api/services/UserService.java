@@ -13,6 +13,8 @@ public class UserService {
 	private static final Logger LOGGER=LogManager.getLogger(AuthService.class);
 
 	private static final String USERDETAILS_ENDPOINT="/userdetails";
+	
+	@Step("Making User Detail API request")
 	public Response userDetail(Role role) {
 		
 		LOGGER.info("Making request to the {} for the Role {}",USERDETAILS_ENDPOINT,role);
