@@ -64,6 +64,19 @@ jobs:
         
     - name: Execute Test Automation Framework
       run: mvn test -DsuiteXmlFile="${{ steps.default.outputs.suiteXmlFile }}" -Denv="${{ steps.default.outputs.env }}"
+
+    - name: Generating Allure Report
+      if: always()
+      run: mvn allure:report
+
+    - name: Deploy to GitHub Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target/site/allure-maven-plugin # Path where Allure generates the HTML
+          
+
       
     - name: Upload a Build Artifact
       if: always()
