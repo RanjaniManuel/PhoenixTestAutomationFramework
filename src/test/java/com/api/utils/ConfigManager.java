@@ -49,9 +49,7 @@ public class ConfigManager {
 		}
 	}
 	@Step("Getting Property Value from config file")
-	public static String getProperty(String key) {
-		
-		
+	public static String getProperty(String key) {		
 		return prop.getProperty(key.toUpperCase());
 	}
 }

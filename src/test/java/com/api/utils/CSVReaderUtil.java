@@ -1,3 +1,4 @@
+
 package com.api.utils;
 
 import java.io.InputStream;
@@ -28,7 +29,7 @@ public class CSVReaderUtil {
 		InputStreamReader inputStreamReader=new InputStreamReader(inputStream);
 		CSVReader csvReader=new CSVReader(inputStreamReader);
 		LOGGER.info("Converting CSV file to the Bean class {}",bean);
-		
+		//T means CreateJobBean
 		CsvToBean<T> csvToBean=new CsvToBeanBuilder(csvReader)
 												.withType(bean)
 												.withIgnoreEmptyLine(true)
