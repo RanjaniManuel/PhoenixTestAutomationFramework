@@ -24,7 +24,7 @@ public class ExcelReaderUtil {
 	public static <T> Iterator<T> loadExcel(String fileName, String sheetName, Class<T> clazz) {
 		LOGGER.info("Reading test data from the excel file {} with sheet name {}", fileName, sheetName);
 		InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
-		System.out.println("Hai");
+		//System.out.println("Hai");
 		XSSFWorkbook workbook = null;
 		try {
 

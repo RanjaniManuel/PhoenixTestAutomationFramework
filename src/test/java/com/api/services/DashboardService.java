@@ -32,7 +32,7 @@ public class DashboardService {
 					.get(COUNT_ENDPOINT);
 		}
 		@Step("Making details API Request")
-		public Response details(Role	role,Object payload) {
+		public Response details(Role role, Object payload) {
 			LOGGER.info("Making request to the {} for the Role {} and Payload {}",DETAIL_ENDPOINT,role,payload);
 			return RestAssured.given().spec(SpecUtil.requestSpecWithAuth(role, payload)).post(DETAIL_ENDPOINT);
 		}
